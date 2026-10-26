@@ -1,0 +1,51 @@
+kind: StatefulSet
+apiVersion: apps/v1
+
+metadata:
+    name: mysql-statefulset
+    namespace: bankapp
+    labels:
+        apps: mysql-label
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+            apps: mysql-label
+    template:
+        metadata:
+            name: mysql-pod
+            namespace: bankapp
+            labels:
+                apps: mysql-label
+        spec:
+            containers:
+            - name: mysql
+              image: mysql:8.0
+              ports:
+              - containerPort: 3306
+              env:
+                  - name: MYSQL_DATABASE
+                    valueFrom:
+                        configMapKeyRef:
+                            name: mysql-configmap
+                            key: MYSQL_DATABASE  
+                  - name: MYSQL_ROOT_PASSWORD
+                    valueFrom: 
+                        secretKeyRef:
+                            name: mysql-secrets
+                            key: MYSQL_ROOT_PASSWORD
+              volumeMounts:
+              - name: mysql-vol
+                mountPath: /var/lib/mysql
+              readinessProbe:
+                  exec:
+                      command: ["mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+                  initialDelaySeconds: 5
+                  periodSeconds: 10
+                  failureThreshold: 3
+            volumes:
+                - name: mysql-vol
+                  persistentVolumeClaim:
+                      claimName: mysql-pvc
+            
+       

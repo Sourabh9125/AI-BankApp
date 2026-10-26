@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+
+metadata:
+    name: mysql-svc
+    namespace: bankapp
+spec:
+    selector:
+        apps: mysql-label
+    ports:
+        - port: 3306 

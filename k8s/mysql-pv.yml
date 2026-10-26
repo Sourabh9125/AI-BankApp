@@ -1,0 +1,37 @@
+kind: PersistentVolume
+apiVersion: v1
+
+metadata:
+    name: mysql-pv
+    namespace: bankapp
+    labels:
+        app: mysql
+
+spec:
+    capacity: 
+        storage: 5Gi
+    storageClassName: manual
+    accessModes:
+        - ReadWriteOnce
+    hostPath:
+        path: /mnt/data/mysql-data 
+
+---
+
+kind: PersistentVolume
+apiVersion: v1
+
+metadata:
+    name: ollama-pv
+    namespace: bankapp
+    labels:
+        app: ollama
+
+spec:
+    capacity:
+        storage: 5Gi
+    storageClassName: manual
+    accessModes:
+        - ReadWriteOnce
+    hostPath:
+        path: /mnt/data/ollama-data

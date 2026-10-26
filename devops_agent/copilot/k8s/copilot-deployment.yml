@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: copilot
+  namespace: bankapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: copilot
+  template:
+    metadata:
+      labels:
+        app: copilot
+    spec:
+      serviceAccountName: copilot-sa
+      containers:
+      - name: copilot
+        image: sourabhlodhi/ai-bankapp-agent:latest
+        ports:
+          - containerPort: 9000
+        env:
+          - name: IN_CLUSTER
+            value: "true"
+          - name: KUBERNETES_NAMESPACE
+            value: "bankapp"
+          - name: ANTHROPIC_API_KEY
+            valueFrom:
+              secretKeyRef:
+                name: copilot-secret
+                key: anthropic_key
+          - name: SMTP_HOST
+            value: "smtp.gmail.com"
+          - name: SMTP_PORT
+            value: "587"
+          - name: SMTP_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: copilot-email-secret
+                key: smtp-username
+          - name: SMTP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: copilot-email-secret
+                key: smtp-password
+          - name: ALERT_EMAIL_TO
+            valueFrom:
+              secretKeyRef:
+                name: copilot-email-secret
+                key: alert-email-to
+

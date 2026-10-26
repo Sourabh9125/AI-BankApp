@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: copilot-rb
+  namespace: bankapp
+subjects:
+- kind: ServiceAccount
+  name: copilot-sa
+  namespace: bankapp
+roleRef:
+  kind: Role
+  name: copilot-role
+  apiGroup: rbac.authorization.k8s.io

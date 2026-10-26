@@ -1,0 +1,12 @@
+kubernetes==29.0.0
+langgraph==0.1.4
+langchain-core==0.2.4
+anthropic>=0.40.0,<1.0.0
+httpx>=0.27.0,<0.28.0
+typer
+python-dotenv
+# Anthropic client for gpt-oss:20b-cloud
+# Typer is used for CLI
+# python-dotenv keeps environment config
+# For Mistral, add mistralai package and set MISTRAL_API_KEY
+# For Anthropic (current default), set ANTHROPIC_API_KEY env variable.

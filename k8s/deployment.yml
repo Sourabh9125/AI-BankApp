@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bankapp-deployment
+  namespace: bankapp
+  labels:
+    app: bankApp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: bankApp
+  template:
+    metadata:
+      name: bankapp-pod
+      namespace: bankapp
+      labels:
+        app: bankApp
+    spec:
+      initContainers:
+          - name: wait-for-mysql
+            image: busybox:1.36
+            command: [ "/bin/sh", "-c", "until nc -z mysql-svc 3306; do sleep 2; done" ]
+            resources: 
+                requests:
+                    cpu: "50m"
+                    memory: "32Mi"
+
+                limits:
+                    cpu: "100m"
+                    memory: "64Mi"
+          - name: wait-for-ollama
+            image: busybox:1.36
+            command: [ "/bin/sh", "-c" , "until nc -z ollama-svc 11434; do sleep 2; done" ]
+            resources:
+                requests:
+                    cpu: "50m"
+                    memory: "32Mi"
+
+                limits:
+                    cpu: "100m"
+                    memory: "64Mi" 
+      containers:
+      - name: bankapp
+        image: sourabhlodhi/bankap:v1
+        ports:
+        - containerPort: 8080
+        resources:
+            requests:
+                memory: "256Mi"
+                cpu: "250m"
+            limits: 
+                cpu: "500m"
+                memory: "512Mi"
+        envFrom:
+            - configMapRef:
+                  name: mysql-configmap
+            - secretRef:
+                  name: mysql-secrets 
+        
