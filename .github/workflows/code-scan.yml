@@ -5,8 +5,8 @@ on:
         branches: [main]
 
 jobs:
-  deploy:
+  code-scan:
     runs-on: ubuntu-latest
     steps:
-      - name: Run deployment
-        run: echo "Deploying code manually!"
+      - name: code scanning
+        uses: actions/checkout@v5
