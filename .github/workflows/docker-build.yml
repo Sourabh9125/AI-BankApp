@@ -28,8 +28,13 @@ jobs:
               with:
                 image-ref: ${{ vars.DOCKERHUB_USERNAME }}/ai-bankapp:${{ github.sha}} 
                 severity: "CRITICAL"
+                exit-code: '1'
 
             - name: Push to Registry
               if: success()
-              run: echo "Code is secure. Proceeding to push image..."
+              uses: docker/build-push-action@v6
+              with:
+                context: .
+                push: true
+                tags: ${{ vars.DOCKERHUB_USERNAME }}/ai-bankapp:${{ github.sha}} 
 
