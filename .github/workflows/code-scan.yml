@@ -7,6 +7,12 @@ on:
 jobs:
   code-scan:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      security-events: write
+      actions: read
+      
     steps:
       - name: code scanning
         uses: actions/checkout@v5
