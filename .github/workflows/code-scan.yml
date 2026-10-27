@@ -1,8 +1,7 @@
 name: code-scan
 
 on:
-    push:
-        branches: [main]
+    workflow_dispatch:
 
 jobs:
   code-scan:
@@ -12,7 +11,7 @@ jobs:
       contents: read
       security-events: write
       actions: read
-      
+
     steps:
       - name: code scanning
         uses: actions/checkout@v5

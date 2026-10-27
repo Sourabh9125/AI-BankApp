@@ -1,8 +1,7 @@
 name: dockerfile-scan
 
 on:
-    push:
-        branches: ["main"]
+    workflow_dispatch:
 
 jobs:
     dockerfile-scan:
