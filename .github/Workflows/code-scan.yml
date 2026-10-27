@@ -5,7 +5,7 @@ on:
 
 jobs:
     code-scan:
-        runs-on: ubuntu-latest
-        steps:
-            - name: code clone
-            - uses: actions/checkout@v5
+      runs-on: ubuntu-latest
+      steps:
+        - name: code clone
+        - uses: actions/checkout@v5
