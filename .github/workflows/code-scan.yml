@@ -1,12 +1,12 @@
 name: code-scan
 
 on:
-    workflow_dispatch:
+    push:
+        branches: [main]
 
 jobs:
-  code-scan:
-
+  deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: code clone
-      uses: actions/checkout@v4
+      - name: Run deployment
+        run: echo "Deploying code manually!"
