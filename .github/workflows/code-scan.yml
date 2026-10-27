@@ -10,3 +10,22 @@ jobs:
     steps:
       - name: code scanning
         uses: actions/checkout@v5
+    
+      - name: setup JDK
+        uses: actions/setup-java@4
+        with:
+            distribution: 'temurin'
+            java-version: '21'
+      
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+            languages: 'java-kotlin'   
+        
+      - name: Autobuild
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+            category: "/language:java-kotlin"
