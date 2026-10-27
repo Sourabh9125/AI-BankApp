@@ -1,0 +1,19 @@
+name: dockerfile-scan
+
+on:
+    push:
+        branches: ["main"]
+
+jobs:
+    dockerfile-scan:
+
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: code checkout
+              uses: actions/checkout@v5
+
+            - name: lint Dockerfile
+              uses: hadolint/hadolint-action@v3.1.0
+              with:
+                dockerfile: Dockerfile
