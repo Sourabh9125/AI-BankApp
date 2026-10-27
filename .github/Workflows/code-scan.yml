@@ -1,7 +1,8 @@
 name: code-scan
 
 on:
-    workflow_dispatch
+    push:
+        branch: [main]
 
 jobs:
     code-scan:
