@@ -4,10 +4,9 @@ on:
     workflow_dispatch:
 
 jobs:
-    code-scan:
+  code-scan:
 
-      runs-on: ubuntu-latest
-      
-      steps:
-        - name: code clone
-          uses: actions/checkout@v4
+    runs-on: ubuntu-latest
+    steps:
+    - name: code clone
+      uses: actions/checkout@v4
