@@ -1,2 +1,10 @@
+name: code-scan
 
-    
+on:
+    workflow_dispatch
+
+jobs:
+    code-scan:
+        steps:
+            - name: code clone
+            - uses: actions/checkout@v5
