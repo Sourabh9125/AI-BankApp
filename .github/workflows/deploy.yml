@@ -19,6 +19,7 @@ jobs:
                 key: ${{ secrets.KEY }}
                 script: |
                     pwd
+                    ls -lrth
 
             # - name: Copy docker compose file
             #   if: success()
