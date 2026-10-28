@@ -1,0 +1,22 @@
+name: Deploy To Server
+
+on:
+    workflow_dispatch:
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: code checkout
+              uses: actions/checkout@v5
+
+            - name: SSH to server
+              uses: appleboy/ssh-action@v1
+              with:
+                host: ${{ secrets.HOST}}
+                username: ${{secrets.USERNAME}}
+                key: ${{secrets.KEY}}
+              script: |
+                echo "Hello test"
+
