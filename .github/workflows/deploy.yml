@@ -15,12 +15,6 @@ jobs:
             - name: code checkout
               uses: actions/checkout@v6
 
-            - name: commands
-              run: |
-                pwd 
-                ls -lrth
-
-
             - name: SSH to server
               uses: appleboy/ssh-action@v1
               with:
@@ -28,6 +22,7 @@ jobs:
                 username: ${{ secrets.USERNAME }}
                 key: ${{ secrets.KEY }}
                 script: |
+                    mkdir -p github-actions
                     docker ps
 
             - name: Copy docker compose file
