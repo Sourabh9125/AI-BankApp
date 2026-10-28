@@ -11,6 +11,9 @@ jobs:
             - name: code checkout
               uses: actions/checkout@v6
 
+            - name: commands
+              run: pwd
+
             - name: SSH to server
               uses: appleboy/ssh-action@v1
               with:
