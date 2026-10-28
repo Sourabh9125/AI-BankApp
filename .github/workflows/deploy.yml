@@ -8,9 +8,6 @@ jobs:
         runs-on: ubuntu-latest
 
         steps:
-            - name: code checkout
-              uses: actions/checkout@v5
-
             - name: SSH to server
               uses: appleboy/ssh-action@v1
               with:
@@ -19,4 +16,6 @@ jobs:
                 key: ${{ secrets.KEY }}
                 script: |
                     echo "Hello test"
+                    mkdir github-actions
+                    
 
