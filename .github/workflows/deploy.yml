@@ -17,6 +17,6 @@ jobs:
                 host: ${{ secrets.HOST}}
                 username: ${{secrets.USERNAME}}
                 key: ${{secrets.KEY}}
-              script: |
-                echo "Hello test"
+                script: |
+                    echo "Hello test"
 
