@@ -6,6 +6,10 @@ on:
 jobs:
     deploy:
         runs-on: ubuntu-latest
+        env:
+             DOCKERHUB_USER: ${{vars.DOCKERHUB_USERNAME}}
+             DOCKER_TAG: ${{ github.sha }}
+
 
         steps:
             - name: code checkout
@@ -43,6 +47,10 @@ jobs:
                 username: ${{ secrets.USERNAME }}
                 key: ${{ secrets.KEY }}
                 script: |
-                    docker compose up --build -d
+                    echo "Running!!!!!!!!!!!!!!!!!!!!!"
+                    export DOCKERHUB_USER=${{ vars.DOCKERHUB_USERNAME }}
+                    export DOCKER_TAG=${{ github.sha }}
+                    echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login --username ${{ vars.DOCKERHUB_USERNAME }} --password-stdin
+                    cd ~/github-actions && docker compose up --build -d
 
 
