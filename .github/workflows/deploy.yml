@@ -17,5 +17,6 @@ jobs:
                 script: |
                     echo "Hello test"
                     mkdir github-actions
-                    
+                    sudo apt-get update -y && sudo apt-get install docker.io -y && sudo apt-get install docker-compose-v2 -y
+
 
