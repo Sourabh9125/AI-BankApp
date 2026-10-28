@@ -15,7 +15,7 @@ jobs:
               run: |
                 pwd 
                 ls -lrth
-                
+
 
             - name: SSH to server
               uses: appleboy/ssh-action@v1
@@ -26,23 +26,23 @@ jobs:
                 script: |
                     docker ps
 
-            # - name: Copy docker compose file
-            #   if: success()
-            #   uses: appleboy/scp-action@v1
-            #   with:
-            #     host: ${{ secrets.HOST }}
-            #     username: ${{ secrets.USERNAME }}
-            #     key: ${{ secrets.KEY }}
-            #     source: "docker-compose.yml"
-            #     target: "/home/ubuntu/github-actions"
+            - name: Copy docker compose file
+              if: success()
+              uses: appleboy/scp-action@v1
+              with:
+                host: ${{ secrets.HOST }}
+                username: ${{ secrets.USERNAME }}
+                key: ${{ secrets.KEY }}
+                source: "docker-compose.yml"
+                target: /home/ubuntu/github-actions
 
-            # - name: SSH to server
-            #   uses: appleboy/ssh-action@v1
-            #   with:
-            #     host: ${{ secrets.HOST }}
-            #     username: ${{ secrets.USERNAME }}
-            #     key: ${{ secrets.KEY }}
-            #     script: |
-            #         docker compose up --build -d
+            - name: SSH to server
+              uses: appleboy/ssh-action@v1
+              with:
+                host: ${{ secrets.HOST }}
+                username: ${{ secrets.USERNAME }}
+                key: ${{ secrets.KEY }}
+                script: |
+                    docker compose up --build -d
 
 
