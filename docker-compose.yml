@@ -68,17 +68,17 @@ services:
       ollama-pull-model:
         condition: service_completed_successfully
 
-  copilot:
-    build:
-      context: ./devops_agent/copilot
-      dockerfile: Dockerfile
-    container_name: copilot
-    environment:
-      - ANTHROPIC_API_KEY
-      - IN_CLUSTER=false
-    volumes:
-      - ~/.kube/config:/root/.kube/config:ro
-    restart: unless-stopped
+  # copilot:
+  #   build:
+  #     context: ./devops_agent/copilot
+  #     dockerfile: Dockerfile
+  #   container_name: copilot
+  #   environment:
+  #     - ANTHROPIC_API_KEY
+  #     - IN_CLUSTER=false
+  #   volumes:
+  #     - ~/.kube/config:/root/.kube/config:ro
+  #   restart: unless-stopped
     # Optional: expose a port if you want to expose the CLI over HTTP
     # ports:
     #   - "9000:9000"
