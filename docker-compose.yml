@@ -49,8 +49,7 @@ services:
       - bankapp
 
   bankapp:
-    build:
-      context: .
+    image: sourabhlodhi/ai-bankapp:7aa8a14988610aef3c0508e7fe7e520bd90d7853
     container_name: bankapp-ai
     ports:
       - "8080:8080"
